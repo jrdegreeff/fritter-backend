@@ -1,0 +1,131 @@
+<html>
+
+<head>
+  <title>Fritter</title>
+  <meta name="author" content="6.170 Staff">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <script src="/scripts/freet.js"></script>
+  <script src="/scripts/user.js"></script>
+  <script src="/scripts/index.js"></script>
+</head>
+
+<body>
+  <header>
+    <h1>Fritter</h1>
+  </header>
+
+  <main class="two-col">
+    <section id="operations-container">
+      <h2>Operations:</h2>
+      <div class="scrollbox">
+        <form id="create-user">
+          <h3>Create User</h3>
+          <div>
+            <label for="username">Username:</label>
+            <input id="username" name="username">
+          </div>
+          <div>
+            <label for="password">Password:</label>
+            <input id="password" name="password">
+          </div>
+          <input type="submit" value="Create User">
+        </form>
+
+        <form id="delete-user">
+          <h3>Delete User</h3>
+          <input type="submit" value="Delete User">
+        </form>
+
+        <form id="change-username">
+          <h3>Change Username</h3>
+          <div>
+            <label for="username">New Username:</label>
+            <input id="username" name="username">
+          </div>
+          <input type="submit" value="Change Username">
+        </form>
+
+        <form id="change-password">
+          <h3>Change Password</h3>
+          <div>
+            <label for="password">New Password:</label>
+            <input id="password" name="password">
+          </div>
+          <input type="submit" value="Change Password">
+        </form>
+
+        <form id="sign-in">
+          <h3>Sign In</h3>
+          <div>
+            <label for="username">Username:</label>
+            <input id="username" name="username">
+          </div>
+          <div>
+            <label for="password">Password:</label>
+            <input id="password" name="password">
+          </div>
+          <input type="submit" value="Sign In">
+        </form>
+
+        <form id="sign-out">
+          <h3>Sign Out</h3>
+          <input type="submit" value="Sign out">
+        </form>
+
+        <form id="view-all-freets">
+            <h3>View All Freets</h3>
+            <input type="submit" value="View All Freets">
+          </form>
+
+        <form id="view-freets-by-author">
+          <h3>View Freets By Author</h3>
+          <div>
+            <label for="author">Author:</label>
+            <input id="author" name="author">
+          </div>
+          <input type="submit" value="View Freets By Author">
+        </form>
+
+        <form id="create-freet">
+          <h3>Create Freet</h3>
+          <div>
+            <label for="content">Content:</label>
+            <textarea id="content" name="content"></textarea>
+          </div>
+          <input type="submit" value="Create Freet">
+        </form>
+
+        <form id="edit-freet">
+          <h3>Edit Freet</h3>
+          <div>
+            <label for="id">ID:</label>
+            <input id="id" name="id">
+          </div>
+          <div>
+            <label for="content">Content:</label>
+            <textarea id="content" name="content"></textarea>
+          </div>
+          <input type="submit" value="Edit Freet">
+        </form>
+
+        <form id="delete-freet">
+          <h3>Delete Freet</h3>
+          <div>
+            <label for="id">ID:</label>
+            <input id="id" name="id">
+          </div>
+          <input type="submit" value="Delete Freet">
+        </form>
+      </div>
+    </section>
+    <section>
+      <h2>Response:</h2>
+      <div class="scrollbox">
+        <pre id="response" class="teletype"></pre>
+      </div>
+    </section>
+  </main>
+</body>
+
+</html>
