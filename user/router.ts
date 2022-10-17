@@ -47,7 +47,7 @@ router.post(
  * @name DELETE /api/users/session
  *
  * @return - None
- * @throws {403} - If user is not logged in
+ * @throws {401} - If user is not logged in
  *
  */
 router.delete(
@@ -102,7 +102,7 @@ router.post(
  * @param {string} username - The user's new username
  * @param {string} password - The user's new password
  * @return {UserResponse} - The updated user
- * @throws {403} - If user is not logged in
+ * @throws {401} - If user is not logged in
  * @throws {409} - If username already taken
  * @throws {400} - If username or password are not of the correct format
  */
@@ -130,7 +130,7 @@ router.put(
  * @name DELETE /api/users
  *
  * @return {string} - A success message
- * @throws {403} - If the user is not logged in
+ * @throws {401} - If the user is not logged in
  */
 router.delete(
   '/',

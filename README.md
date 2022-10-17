@@ -4,7 +4,7 @@ Build your own not-quite-[Twitter](https://twitter.com/)!
 
 ## Starter Code
 
-  This starter code implements users (with login/sessions), and freets so that you may focus on implementing your own design ideas.
+This starter code implements users (with login/sessions), and freets so that you may focus on implementing your own design ideas.
 
 The project is structured as follows:
 
@@ -201,15 +201,15 @@ This renders the `index.html` file that will be used to interact with the backen
 **Returns**
 
 - A success message
-- A object with the created freet
+- An object with the created freet
 
 **Throws**
 
-- `403` if the user is not logged in
+- `401` if the user is not logged in
 - `400` If the freet content is empty or a stream of empty spaces
 - `413` If the freet content is more than 140 characters long
 
-#### `DELETE /api/freets/:freetId?` - Delete an existing freet
+#### `DELETE /api/freets/:freetId` - Delete an existing freet
 
 **Returns**
 
@@ -217,11 +217,11 @@ This renders the `index.html` file that will be used to interact with the backen
 
 **Throws**
 
-- `403` if the user is not logged in
+- `401` if the user is not logged in
 - `403` if the user is not the author of the freet
 - `404` if the freetId is invalid
 
-#### `PUT /api/freets/:freetId?` - Update an existing freet
+#### `PUT /api/freets/:freetId` - Update an existing freet
 
 **Body**
 
@@ -234,7 +234,7 @@ This renders the `index.html` file that will be used to interact with the backen
 
 **Throws**
 
-- `403` if the user is not logged in
+- `401` if the user is not logged in
 - `404` if the freetId is invalid
 - `403` if the user is not the author of the freet
 - `400` if the new freet content is empty or a stream of empty spaces
@@ -266,7 +266,7 @@ This renders the `index.html` file that will be used to interact with the backen
 
 **Throws**
 
-- `403` if user is not logged in
+- `401` if user is not logged in
 
 #### `POST /api/users` - Create an new user account
 
@@ -300,7 +300,7 @@ This renders the `index.html` file that will be used to interact with the backen
 
 **Throws**
 
-- `403` if the user is not logged in
+- `401` if the user is not logged in
 - `400` if username or password is in the wrong format
 - `409` if the username is already in use
 
@@ -312,4 +312,4 @@ This renders the `index.html` file that will be used to interact with the backen
 
 **Throws**
 
-- `403` if the user is not logged in
+- `401` if the user is not logged in

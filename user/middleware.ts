@@ -1,5 +1,4 @@
 import type {Request, Response, NextFunction} from 'express';
-import {Types} from 'mongoose';
 import UserCollection from '../user/collection';
 
 /**
@@ -106,7 +105,7 @@ const isUsernameNotAlreadyInUse = async (req: Request, res: Response, next: Next
  */
 const isUserLoggedIn = (req: Request, res: Response, next: NextFunction) => {
   if (!req.session.userId) {
-    res.status(403).json({
+    res.status(401).json({
       error: {
         auth: 'You must be logged in to complete this action.'
       }
