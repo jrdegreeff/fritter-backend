@@ -16,7 +16,7 @@ import {freetRouter} from '../freet/router';
 dotenv.config({});
 
 // Connect to mongoDB
-const mongoConnectionUrl = process.env.MONGO_SRV;
+const mongoConnectionUrl = process.env.MONGO_SRV?.replace('<password>', process.env.PASSWORD ?? '') ?? '';
 if (!mongoConnectionUrl) {
   throw new Error('Please add the MongoDB connection SRV as \'MONGO_SRV\'');
 }
