@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 
 /**
@@ -31,6 +32,13 @@ function editFreet(fields) {
 
 function deleteFreet(fields) {
   fetch(`/api/freets/${fields.id}`, {method: 'DELETE'})
+    .then(showResponse)
+    .catch(showResponse);
+}
+
+function viewFreet(fields) {
+  body = {...fields, views: true};
+  fetch(`/api/freets/${fields.id}`, {method: 'PUT', body: JSON.stringify(body), headers: {'Content-Type': 'application/json'}})
     .then(showResponse)
     .catch(showResponse);
 }

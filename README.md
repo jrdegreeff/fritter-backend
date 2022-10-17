@@ -2,9 +2,29 @@
 
 Build your own not-quite-[Twitter](https://twitter.com/)!
 
+## Demo adding a new field
+
+On this branch, we have implemented an example of adding a field to an existing concept (freet) for your reference. We have added a field called "views", which is a counter to indicate how many views a freet has. Some of the important additions that we made are in the following files:
+
+- `freet/collection.ts`, we updated the `updateOne` method that updates a freet document depending on which fields have been provided
+
+- In `freet/model.ts`, we add `views` to the `Freet` interface and add it as a field to the `FreetSchema` schema.
+
+- In `public/index.html`, we add a new form that allows you to "Increment Views on Freet".
+
+- In `public/scripts/freet.js`, we create a new function called `viewFreet` that makes the appropriate API call and add to
+
+- In `public/scripts/index.js` we add the method `viewFreet` in `formsAndHandlers` to connect it to the backend.
+
+- In `freet/router.ts`, we update the API route (`PUT /api/freets/:freetId`) to simply pass the body to the `FreetCollection.updateOne` method.
+
+- In `freet/util.ts`, we add `views` as another field to the `FreetResponse` interface.
+
+Feel free to explore this branch to help with your own application!
+
 ## Starter Code
 
-  This starter code implements users (with login/sessions), and freets so that you may focus on implementing your own design ideas.
+This starter code implements users (with login/sessions), freets, and feeds so that you may focus on implementing your own design ideas.
 
 The project is structured as follows:
 
@@ -25,7 +45,7 @@ The project is structured as follows:
 
 ## Installation
 
-Make a copy of this repository under your personal GitHub account by clicking the `Use this template` button. Make sure to enable the `Include all branches` option.
+Clone this repository.
 
 If you did **not** take 6.031 in Fall 2021 or Spring 2022, to ensure that your machine has the necessary software for the assignment, please follow Steps 1, 2, 5, and 6 on [this page](https://web.mit.edu/6.031/www/sp22/getting-started/) from the [6.031 website](https://web.mit.edu/6.031/www/sp22/) (now 6.1020).
 
@@ -35,8 +55,8 @@ If you did **not** take 6.031 in Fall 2021 or Spring 2022, to ensure that your m
 - Run `source demo-setup.sh` to set up the demo branches.
 - Check your local branches with `git branch`; you should have one new branch, with a new commit.
   - `view-demo` demos how to extend functionality of a resource
-- If everything looks good, run `git push --all origin`. At this point, you should see the demo branch at `https://github.com/<username>/<repo-name>/branches` (and the `view-demo-code` branch can now be deleted!)
-- Now, if you navigate to the commit history of this branch (`https://github.com/<username>/<repo-name>/commits/<branch-name>`), you can click on the "demo:" commit and see exactly what we changed for each demo!
+- If everything looks good, run `git push --all origin`. At this point, you should see the demo branch at `https://github.com/61040-fa22/<repo-name>/branches` (and the `view-demo-code` branch can now be deleted!)
+- Now, if you navigate to the commit history of this branch (`https://github.com/61040-fa22/<repo-name>/commits/<branch-name>`), you can click on the "demo:" commit and see exactly what we changed for each demo!
 
 ### MongoDB Atlas setup
 
