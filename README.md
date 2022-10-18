@@ -434,3 +434,17 @@ This renders the `index.html` file that will be used to interact with the backen
 - `401` if the user is not logged in
 - `404` if the name is not a recognized name of any of the user's feeds
 - `404` if the username is not in the list of sources of the specified feed
+
+#### `GET /api/thread?freet=FREETID` - Get all freets in a thread
+
+**Returns**
+
+- An object with the following fields
+  - lineage of the freet
+  - details of the freet
+  - children of a freet, ordered descending by relevance rating
+
+**Throws**
+
+- `400` if `freet` is not given
+- `404` if `freet` is invalid
