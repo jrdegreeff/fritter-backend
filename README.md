@@ -354,3 +354,83 @@ This renders the `index.html` file that will be used to interact with the backen
 - `401` if the user is not logged in
 - `403` if the user is not the author of the freet
 - `404` if the user with the username is not being followed
+
+#### `GET /api/feeds?name=NAME` - Get feed by name
+
+**Returns**
+
+- An array of freets from the specified feed, sorted in descending order by date modified
+
+**Throws**
+
+- `401` if the user is not logged in
+- `400` if `name` is not given
+- `404` if `name` is not a recognized name of any of the user's feeds
+
+#### `POST /api/feeds` - Create a feed
+
+**Body**
+
+- `name` _{string}_ - The name of the feed
+
+**Returns**
+
+- A success message
+- An object with the created feed's details
+
+**Throws**
+
+- `401` if the user is not logged in
+- `400` if `name` is empty or a stream of empty spaces
+- `409` if the user already has a feed with name `name`
+
+#### `DELETE /api/feeds/:name` - Delete a feed
+
+**Returns**
+
+- A success message
+
+**Throws**
+
+- `401` if the user is not logged in
+- `404` if the name is not a recognized name of any of the user's feeds
+
+#### `GET /api/feeds/:name/sources` - Get sources of a feed
+
+**Returns**
+
+- An array of sources for the specified feed, sorted in ascending order by username
+
+**Throws**
+
+- `401` if the user is not logged in
+- `404` if the name is not a recognized name of any of the user's feeds
+
+#### `POST /api/feeds/:name/sources` - Add a source to a feed
+
+**Body**
+
+- `username` _{string}_ - The username to add to the sources
+
+**Returns**
+
+- A success message
+- An object with the updated feed's details
+
+**Throws**
+
+- `401` if the user is not logged in
+- `404` if the name is not a recognized name of any of the user's feeds
+- `409` if the username is already in the list of sources of the specified feed
+
+#### `DELETE /api/feeds/:name/sources/:username` - Remove a source from a feed
+
+**Returns**
+
+- A success message
+
+**Throws**
+
+- `401` if the user is not logged in
+- `404` if the name is not a recognized name of any of the user's feeds
+- `404` if the username is not in the list of sources of the specified feed
