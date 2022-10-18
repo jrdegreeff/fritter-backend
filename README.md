@@ -197,6 +197,7 @@ This renders the `index.html` file that will be used to interact with the backen
 **Body**
 
 - `content` _{string}_ - The content of the freet
+- `parent` _{freetId}_ - The freet being replied to (optional)
 
 **Returns**
 
@@ -208,6 +209,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - `401` if the user is not logged in
 - `400` If the freet content is empty or a stream of empty spaces
 - `413` If the freet content is more than 140 characters long
+- `404` if `parent` is present but is not a recognized id of any freet
 
 #### `DELETE /api/freets/:freetId` - Delete an existing freet
 
@@ -313,3 +315,42 @@ This renders the `index.html` file that will be used to interact with the backen
 **Throws**
 
 - `401` if the user is not logged in
+
+#### `GET /api/follows?user=USERNAME` - Get followers by user
+
+**Returns**
+
+- An array of users followed by user with username `user`
+
+**Throws**
+
+- `400` if `user` is not given
+- `404` if `user` is not a recognized username of any user
+
+#### `POST /api/follows` - Follow a user
+
+**Body**
+
+- `target` _{string}_ - The username of the account to follow
+
+**Returns**
+
+- A success message
+- An updated array of users followed by the user
+
+**Throws**
+
+- `401` if the user is not logged in
+- `404` if `target` is not a recognized username of any user
+
+#### `DELETE /api/follows/:username` - Unfollow a user
+
+**Returns**
+
+- A success message
+
+**Throws**
+
+- `401` if the user is not logged in
+- `403` if the user is not the author of the freet
+- `404` if the user with the username is not being followed
