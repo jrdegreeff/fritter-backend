@@ -11,7 +11,7 @@ type ParameterizedFeed<U,S,I> = {
     items: Array<I>;
 };
 
-export type Feed = ParameterizedFeed<Types.ObjectId,Types.ObjectId,Types.ObjectId>;
+type Feed = ParameterizedFeed<Types.ObjectId,Types.ObjectId,Types.ObjectId>;
 export type PopulatedFeed = ParameterizedFeed<User,User,PopulatedFreet>;
 
 const FeedSchema = new Schema<Feed>({

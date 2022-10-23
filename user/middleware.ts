@@ -182,7 +182,6 @@ const isParamsUsernameExists = async (req: Request, res: Response, next: NextFun
  */
 const isUsernameNotSelf = async (req: Request, res: Response, next: NextFunction) => {
   const user = await UserCollection.findOneByUsername(req.body.username);
-  console.log(user._id, req.session.userId)
   if (user._id.toString() === req.session.userId) {
     res.status(400).json({
       error: `You can't follow yourself!`

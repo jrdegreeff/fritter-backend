@@ -9,7 +9,7 @@ type ParameterizedThread<I> = {
     children: Array<I>;
 };
 
-export type Thread = ParameterizedThread<Types.ObjectId>;
+type Thread = ParameterizedThread<Types.ObjectId>;
 export type PopulatedThread = ParameterizedThread<PopulatedFreet>;
 
 const ThreadSchema = new Schema<Thread>({

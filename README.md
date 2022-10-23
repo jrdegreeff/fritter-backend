@@ -425,7 +425,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - `401` if the user is not logged in
 - `404` if the name is not a recognized name of any of the user's feeds
 
-#### `GET /api/thread?freet=FREETID` - Get all freets in a thread
+#### `GET /api/threads?freetId=FREETID` - Get all freets in a thread
 
 **Returns**
 
@@ -436,5 +436,5 @@ This renders the `index.html` file that will be used to interact with the backen
 
 **Throws**
 
-- `400` if `freet` is not given
-- `404` if `freet` is invalid
+- `400` if `freetId` is not given
+- `404` if `freetId` is invalid

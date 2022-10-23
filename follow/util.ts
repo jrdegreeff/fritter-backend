@@ -1,7 +1,7 @@
 import type {HydratedDocument} from 'mongoose';
 import type {PopulatedFollow} from './model';
 
-type FollowResponse = {
+export type FollowResponse = {
     user: string;
     followers: Array<string>;
     following: Array<string>;
@@ -14,10 +14,15 @@ type FollowResponse = {
  * @return the corresponding response object
  */
 const constructFollowResponse = (follow: HydratedDocument<PopulatedFollow>): FollowResponse => {
+    const followCopy: PopulatedFollow = {
+        ...follow.toObject({
+            versionKey: false // Cosmetics; prevents returning of __v property
+        })
+    };
     return {
-        user: follow.user.username,
-        followers: follow.followers.map(u => u.username),
-        following: follow.following.map(u => u.username)
+        user: followCopy.user.username,
+        followers: followCopy.followers.map(u => u.username),
+        following: followCopy.following.map(u => u.username)
     };
 };
 

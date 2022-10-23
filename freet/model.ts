@@ -8,7 +8,7 @@ import type {User} from '../user/model';
  */
 
 // Type definition for Freet on the backend
-export type Freet = {
+type Freet = {
   _id: Types.ObjectId; // MongoDB assigns each object this ID on creation
   authorId: Types.ObjectId;
   dateCreated: Date;

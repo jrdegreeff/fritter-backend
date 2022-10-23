@@ -19,14 +19,21 @@ const isFreetExists = async (freetId: string, res: Response, next: NextFunction)
 };
 
 /**
- * Checks if a freet with freetId is req.params exists
+ * Checks if a freet with freetId in req.params exists
  */
 const isParamsFreetExists = async (req: Request, res: Response, next: NextFunction) => {
   isFreetExists(req.params.freetId, res, next);
 };
 
 /**
- * Checks if a freet with parent is req.body exists
+ * Checks if a freet with freetId in req.query exists
+ */
+ const isQueryFreetExists = async (req: Request, res: Response, next: NextFunction) => {
+  isFreetExists(req.query.freetId as string, res, next);
+};
+
+/**
+ * Checks if a freet with parent in req.body exists
  */
 const isParentFreetExists = async (req: Request, res: Response, next: NextFunction) => {
   req.body.parent ? isFreetExists(req.body.parent, res, next) : next();
@@ -74,6 +81,7 @@ const isValidFreetModifier = async (req: Request, res: Response, next: NextFunct
 export {
   isValidFreetContent,
   isParamsFreetExists,
+  isQueryFreetExists,
   isParentFreetExists,
   isValidFreetModifier
 };

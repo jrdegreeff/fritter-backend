@@ -1,5 +1,5 @@
 function viewThreadById(fields) {
-    fetch(`/api/thread?freet=${fields.freetId}`)
+    fetch(`/api/threads?freetId=${fields.freetId}`)
         .then(showResponse)
         .catch(showResponse);
 }

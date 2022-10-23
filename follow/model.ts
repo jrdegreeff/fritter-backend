@@ -9,7 +9,7 @@ type ParameterizedFollow<U> = {
     following: Array<U>;
 };
 
-export type Follow = ParameterizedFollow<Types.ObjectId>;
+type Follow = ParameterizedFollow<Types.ObjectId>;
 export type PopulatedFollow = ParameterizedFollow<User>;
 
 const FollowSchema = new Schema<Follow>({
