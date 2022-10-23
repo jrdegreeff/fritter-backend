@@ -270,8 +270,8 @@ This renders the `index.html` file that will be used to interact with the backen
 
 **Body**
 
-- `content` _{string}_ - The content of the freet
 - `parent` _{freetId}_ - The freet being replied to (optional)
+- `content` _{string}_ - The content of the freet
 
 **Returns**
 
@@ -281,9 +281,9 @@ This renders the `index.html` file that will be used to interact with the backen
 **Throws**
 
 - `401` if the user is not logged in
+- `404` if `parent` is present but is not a recognized id of any freet
 - `400` If the freet content is empty or a stream of empty spaces
 - `413` If the freet content is more than 140 characters long
-- `404` if `parent` is present but is not a recognized id of any freet
 
 #### `DELETE /api/freets/:freetId?` - Delete an existing freet
 

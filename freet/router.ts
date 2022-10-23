@@ -54,8 +54,10 @@ router.get(
  * @name POST /api/freets
  *
  * @param {string} content - The content of the freet
+ * @param {string} parent - The parent of the freet (optional)
  * @return {FreetResponse} - The created freet
  * @throws {401} - If the user is not logged in
+ * @throws {404} - If parent is present but is not a recognized id of any freet
  * @throws {400} - If the freet content is empty or a stream of empty spaces
  * @throws {413} - If the freet content is more than 140 characters long
  */
@@ -63,11 +65,12 @@ router.post(
   '/',
   [
     userValidator.isUserLoggedIn,
+    freetValidator.isParentFreetExists,
     freetValidator.isValidFreetContent
   ],
   async (req: Request, res: Response) => {
     const userId = (req.session.userId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
-    const freet = await FreetCollection.addOne(userId, req.body.content);
+    const freet = await FreetCollection.addOne(userId, req.body.parent, req.body.content);
 
     res.status(201).json({
       message: 'Your freet was created successfully.',
@@ -90,7 +93,7 @@ router.delete(
   '/:freetId?',
   [
     userValidator.isUserLoggedIn,
-    freetValidator.isFreetExists,
+    freetValidator.isParamsFreetExists,
     freetValidator.isValidFreetModifier
   ],
   async (req: Request, res: Response) => {

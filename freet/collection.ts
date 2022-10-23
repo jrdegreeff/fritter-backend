@@ -16,14 +16,16 @@ class FreetCollection {
    * Add a freet to the collection
    *
    * @param {string} authorId - The id of the author of the freet
+   * @param {string} parentId - The id of the parent freet
    * @param {string} content - The id of the content of the freet
    * @return {Promise<HydratedDocument<Freet>>} - The newly created freet
    */
-  static async addOne(authorId: Types.ObjectId | string, content: string): Promise<HydratedDocument<Freet>> {
+  static async addOne(authorId: Types.ObjectId | string, parent: Types.ObjectId | string, content: string): Promise<HydratedDocument<Freet>> {
     const date = new Date();
     const freet = new FreetModel({
       authorId,
       dateCreated: date,
+      ...(parent && {parent}),
       content,
       // dateModified: date
     });
