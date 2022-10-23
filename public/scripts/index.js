@@ -41,7 +41,12 @@ const formsAndHandlers = {
   'delete-freet': deleteFreet,
   'view-follows-by-user': viewFollowsByUser,
   'follow': follow,
-  'unfollow': unfollow
+  'unfollow': unfollow,
+  'get-feed-by-name': getFeedByName,
+  'create-feed': createFeed,
+  'update-feed': updateFeed,
+  'delete-feed': deleteFeed,
+  'view-thread-by-id': viewThreadById
 };
 
 // Attach handlers to forms

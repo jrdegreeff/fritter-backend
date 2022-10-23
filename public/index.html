@@ -5,8 +5,11 @@
   <meta name="author" content="6.170 Staff">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/stylesheets/style.css">
+  <script src="/scripts/feed.js"></script>
   <script src="/scripts/freet.js"></script>
   <script src="/scripts/follow.js"></script>
+  <script src="/scripts/rating.js"></script>
+  <script src="/scripts/thread.js"></script>
   <script src="/scripts/user.js"></script>
   <script src="/scripts/index.js"></script>
 </head>
@@ -144,6 +147,59 @@
             <input id="username" name="username">
           </div>
           <input type="submit" value="Unfollow User">
+        </form>
+
+        <form id="get-feed-by-name">
+          <h3>Get Feed</h3>
+          <div>
+            <label for="name">Name:</label>
+            <input id="name" name="name">
+          </div>
+          <input type="submit" value="Get Feed">
+        </form>
+
+        <form id="create-feed">
+          <h3>Create Feed</h3>
+          <div>
+            <label for="name">Name:</label>
+            <input id="name" name="name">
+          </div>
+          <input type="submit" value="Create Feed">
+        </form>
+
+        <form id="update-feed">
+          <h3>Update Feed</h3>
+          <div>
+            <label for="name">Name:</label>
+            <input id="name" name="name">
+          </div>
+          <div>
+            <label for="add">Add:</label>
+            <input id="add" name="add">
+          </div>
+          <div>
+            <label for="remove">Remove:</label>
+            <input id="remove" name="remove">
+          </div>
+          <input type="submit" value="Update Feed">
+        </form>
+
+        <form id="delete-feed">
+          <h3>Delete Feed</h3>
+          <div>
+            <label for="name">Name:</label>
+            <input id="name" name="name">
+          </div>
+          <input type="submit" value="Delete Feed">
+        </form>
+
+        <form id="view-thread-by-id">
+          <h3>View Thread</h3>
+          <div>
+            <label for="freetId">Freet Id:</label>
+            <input id="freetId" name="freetId">
+          </div>
+          <input type="submit" value="View Thread">
         </form>
       </div>
     </section>

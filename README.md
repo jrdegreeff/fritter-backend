@@ -202,7 +202,7 @@ This renders the `index.html` file that will be used to interact with the backen
 **Returns**
 
 - A success message
-- An object with the created freet
+- The created freet
 
 **Throws**
 
@@ -232,7 +232,7 @@ This renders the `index.html` file that will be used to interact with the backen
 **Returns**
 
 - A success message
-- An object with the updated freet
+- The updated freet
 
 **Throws**
 
@@ -252,7 +252,7 @@ This renders the `index.html` file that will be used to interact with the backen
 **Returns**
 
 - A success message
-- An object with user's details (without password)
+- The user's details (without password)
 
 **Throws**
 
@@ -280,7 +280,7 @@ This renders the `index.html` file that will be used to interact with the backen
 **Returns**
 
 - A success message
-- An object with the created user's details (without password)
+- The created user's details (without password)
 
 **Throws**
 
@@ -298,7 +298,7 @@ This renders the `index.html` file that will be used to interact with the backen
 **Returns**
 
 - A success message
-- An object with the update user details (without password)
+- The updated user details (without password)
 
 **Throws**
 
@@ -320,7 +320,10 @@ This renders the `index.html` file that will be used to interact with the backen
 
 **Returns**
 
-- An object with array fields followers and following
+- A success message
+- The user's details (without password)
+- An array of users who follow the user
+- An array of users whom the user is following
 
 **Throws**
 
@@ -357,11 +360,13 @@ This renders the `index.html` file that will be used to interact with the backen
 - `400` if `username` is not given
 - `404` if username is not the username of a followed user
 
-#### `GET /api/feeds?name=NAME` - Get feed by name
+#### `GET /api/feeds/:name` - Get feed by name
 
 **Returns**
 
-- An array of freets from the specified feed, sorted in descending order by date modified
+- A success message
+- An array of sources of the feed, sorted in ascending order by username
+- An array of freets from the feed, sorted in descending order by date modified
 
 **Throws**
 
@@ -378,13 +383,34 @@ This renders the `index.html` file that will be used to interact with the backen
 **Returns**
 
 - A success message
-- An object with the created feed's details
+- The created feed's details
 
 **Throws**
 
 - `401` if the user is not logged in
 - `400` if `name` is empty or a stream of empty spaces
 - `409` if the user already has a feed with name `name`
+
+#### `PATCH /api/feeds/:name` - Add or remove sources of a feed
+
+**Body**
+
+- `add` _{array<string>)_ - The sources to add to the feed (optional)
+- `remove` _{array<string>}_ - The sources to remove from the feed (optional)
+
+**Returns**
+
+- A success message
+- The updated feed's details
+
+**Throws**
+
+- `401` if the user is not logged in
+- `400` if `name` is not given
+- `404` if `name` is not a recognized name of any of the user's feeds
+- `409` if a source in `add` is already a source of the feed
+- `404` if a source in `remove` is not a source of the feed
+- `400` if both `add` and `remove` are missing or empty
 
 #### `DELETE /api/feeds/:name` - Delete a feed
 
@@ -397,46 +423,6 @@ This renders the `index.html` file that will be used to interact with the backen
 - `401` if the user is not logged in
 - `404` if the name is not a recognized name of any of the user's feeds
 
-#### `GET /api/feeds/:name/sources` - Get sources of a feed
-
-**Returns**
-
-- An array of sources for the specified feed, sorted in ascending order by username
-
-**Throws**
-
-- `401` if the user is not logged in
-- `404` if the name is not a recognized name of any of the user's feeds
-
-#### `POST /api/feeds/:name/sources` - Add a source to a feed
-
-**Body**
-
-- `username` _{string}_ - The username to add to the sources
-
-**Returns**
-
-- A success message
-- An object with the updated feed's details
-
-**Throws**
-
-- `401` if the user is not logged in
-- `404` if the name is not a recognized name of any of the user's feeds
-- `409` if the username is already in the list of sources of the specified feed
-
-#### `DELETE /api/feeds/:name/sources/:username` - Remove a source from a feed
-
-**Returns**
-
-- A success message
-
-**Throws**
-
-- `401` if the user is not logged in
-- `404` if the name is not a recognized name of any of the user's feeds
-- `404` if the username is not in the list of sources of the specified feed
-
 #### `GET /api/thread?freet=FREETID` - Get all freets in a thread
 
 **Returns**
@@ -444,7 +430,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - An object with the following fields
   - lineage of the freet
   - details of the freet
-  - children of a freet, ordered descending by relevance rating
+  - children of a freet, annotated with relevance rating
 
 **Throws**
 
