@@ -62,7 +62,7 @@ class FreetCollection {
    */
   static async findAllByUsername(username: string): Promise<Array<HydratedDocument<PopulatedFreet>>> {
     const author = await UserCollection.findOneByUsername(username);
-    return FreetModel.find({authorId: author._id}).populate('authorId');
+    return FreetModel.find({authorId: author._id}).sort({dateCreated: -1}).populate('authorId');
   }
 
   /**
