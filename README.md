@@ -175,6 +175,80 @@ The following api routes have already been implemented for you (**Make sure to d
 
 This renders the `index.html` file that will be used to interact with the backend
 
+#### `POST /api/users/session` - Sign in user
+
+**Body**
+
+- `username` _{string}_ - The user's username
+- `password` _{string}_ - The user's password
+
+**Returns**
+
+- A success message
+- The user's details (without password)
+
+**Throws**
+
+- `403` if the user is already logged in
+- `400` if username or password is not in correct format format or missing in the req
+- `401` if the user login credentials are invalid
+
+#### `DELETE /api/users/session` - Sign out user
+
+**Returns**
+
+- A success message
+
+**Throws**
+
+- `401` if user is not logged in
+
+#### `POST /api/users` - Create an new user account
+
+**Body**
+
+- `username` _{string}_ - The user's username
+- `password` _{string}_ - The user's password
+
+**Returns**
+
+- A success message
+- The created user's details (without password)
+
+**Throws**
+
+- `403` if there is a user already logged in
+- `400` if username or password is in the wrong format
+- `409` if username is already in use
+
+#### `PUT /api/users` - Update a user's account details
+
+**Body** _(no need to add fields that are not being changed)_
+
+- `username` _{string}_ - The user's username
+- `password` _{string}_ - The user's password
+
+**Returns**
+
+- A success message
+- The updated user details (without password)
+
+**Throws**
+
+- `401` if the user is not logged in
+- `400` if username or password is in the wrong format
+- `409` if the username is already in use
+
+#### `DELETE /api/users` - Delete user
+
+**Returns**
+
+- A success message
+
+**Throws**
+
+- `401` if the user is not logged in
+
 #### `GET /api/freets` - Get all the freets
 
 **Returns**
@@ -243,80 +317,6 @@ This renders the `index.html` file that will be used to interact with the backen
 - `400` if the new freet content is empty or a stream of empty spaces
 - `413` if the new freet content is more than 140 characters long
 -->
-
-#### `POST /api/users/session` - Sign in user
-
-**Body**
-
-- `username` _{string}_ - The user's username
-- `password` _{string}_ - The user's password
-
-**Returns**
-
-- A success message
-- The user's details (without password)
-
-**Throws**
-
-- `403` if the user is already logged in
-- `400` if username or password is not in correct format format or missing in the req
-- `401` if the user login credentials are invalid
-
-#### `DELETE /api/users/session` - Sign out user
-
-**Returns**
-
-- A success message
-
-**Throws**
-
-- `401` if user is not logged in
-
-#### `POST /api/users` - Create an new user account
-
-**Body**
-
-- `username` _{string}_ - The user's username
-- `password` _{string}_ - The user's password
-
-**Returns**
-
-- A success message
-- The created user's details (without password)
-
-**Throws**
-
-- `403` if there is a user already logged in
-- `400` if username or password is in the wrong format
-- `409` if username is already in use
-
-#### `PUT /api/users` - Update a user's profile
-
-**Body** _(no need to add fields that are not being changed)_
-
-- `username` _{string}_ - The user's username
-- `password` _{string}_ - The user's password
-
-**Returns**
-
-- A success message
-- The updated user details (without password)
-
-**Throws**
-
-- `401` if the user is not logged in
-- `400` if username or password is in the wrong format
-- `409` if the username is already in use
-
-#### `DELETE /api/users` - Delete user
-
-**Returns**
-
-- A success message
-
-**Throws**
-
-- `401` if the user is not logged in
 
 #### `GET /api/follows?username=USERNAME` - Get followers and following of a user
 
@@ -432,7 +432,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - An object with the following fields
   - lineage of the freet
   - details of the freet
-  - children of a freet, annotated with relevance rating
+  - children of a freet, sorted in descending order by relevance rating
 
 **Throws**
 
