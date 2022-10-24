@@ -1,6 +1,7 @@
 import type {NextFunction, Request, Response} from 'express';
 import express from 'express';
 import FreetCollection from './collection';
+import FeedCollection from '../feed/collection';
 import ThreadCollection from '../thread/collection';
 import * as userValidator from '../user/middleware';
 import * as freetValidator from '../freet/middleware';
@@ -73,6 +74,7 @@ router.post(
     const userId = (req.session.userId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
     const freet = await FreetCollection.addOne(userId, req.body.parent, req.body.content);
     await ThreadCollection.addOne(freet._id, req.body.parent);
+    await FeedCollection.addItem(req.session.userId, freet._id);
     res.status(201).json({
       message: 'Your freet was created successfully.',
       freet: util.constructFreetResponse(freet)
@@ -100,6 +102,7 @@ router.delete(
   async (req: Request, res: Response) => {
     await FreetCollection.deleteOne(req.params.freetId);
     await ThreadCollection.deleteOne(req.params.freetId);
+    await FeedCollection.removeItem(req.session.userId, req.params.freetId);
     res.status(200).json({
       message: 'Your freet was deleted successfully.'
     });

@@ -12,7 +12,7 @@ const router = express.Router();
  * 
  * @name GET /api/follows?username=username
  * 
- * @return {FollowResponse}
+ * @return {FollowResponse} the details of the user's followers and following
  * 
  * @throws {400} if username is not given
  * @throws {404} if username is not a recognized username of any user

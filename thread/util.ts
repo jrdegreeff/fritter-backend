@@ -28,7 +28,7 @@ const constructThreadResponse = (thread: HydratedDocument<PopulatedThread>): Thr
             ...freetUtil.constructFreetResponseFromObject(child.freet),
             rating: child.rating
         })).sort((a, b) => b.rating - a.rating)
-    }
+    };
 }
 
 /**

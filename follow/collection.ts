@@ -102,8 +102,8 @@ class FollowCollection {
      * @param followingUsername the username of the followed account
      */
      static async removeFollow(followerId: Types.ObjectId | string, followingId: Types.ObjectId | string): Promise<void> {
-        await FollowModel.updateOne({user: followerId}, {$pullAll: {following: [followingId]}});
-        await FollowModel.updateOne({user: followingId}, {$pullAll: {followers: [followerId]}});
+        await FollowModel.updateOne({user: followerId}, {$pull: {following: followingId}});
+        await FollowModel.updateOne({user: followingId}, {$pull: {followers: followerId}});
     }
 
 }

@@ -11,7 +11,7 @@ const router = express.Router();
  * 
  * @name GET /api/threads?freetId=freetId
  * 
- * @return {ThreadResponse}
+ * @return {ThreadResponse} the details of the requested thread
  * 
  * @throws {400} if freetId is not given
  * @throws {404} if freetId is invalid

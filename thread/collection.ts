@@ -1,6 +1,7 @@
 import {HydratedDocument, Types} from 'mongoose';
 import type {PopulatedThread} from './model';
 import ThreadModel from './model';
+import FreetCollection from '../freet/collection';
 import * as util from './util';
 
 class ThreadCollection {
@@ -57,6 +58,16 @@ class ThreadCollection {
             descendant.save();
         }
         thread.delete();
+    }
+
+    /**
+     * Delete all thread documents associated with freets by a particular author.
+     * 
+     * @param authorId the author of the threads to delete
+     */
+    static async deleteMany(authorId: Types.ObjectId | string): Promise<void> {
+        const freets = await FreetCollection.findAllFreetIdsByUserId(authorId);
+        ThreadModel.deleteMany({freet: {$in: freets}});
     }
 
 }

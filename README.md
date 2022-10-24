@@ -362,11 +362,10 @@ This renders the `index.html` file that will be used to interact with the backen
 - `400` if `username` is not given
 - `404` if username is not the username of a followed user
 
-#### `GET /api/feeds/:name` - Get feed by name
+#### `GET /api/feeds/:name` - Get sources and posts of a feed
 
 **Returns**
 
-- A success message
 - An array of sources of the feed, sorted in ascending order by username
 - An array of freets from the feed, sorted in descending order by date modified
 
@@ -393,7 +392,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - `400` if `name` is empty or a stream of empty spaces
 - `409` if the user already has a feed with name `name`
 
-#### `PATCH /api/feeds/:name` - Add or remove sources of a feed
+#### `PATCH /api/feeds/:name` - Add and/or remove sources of a feed
 
 **Body**
 
@@ -410,9 +409,11 @@ This renders the `index.html` file that will be used to interact with the backen
 - `401` if the user is not logged in
 - `400` if `name` is not given
 - `404` if `name` is not a recognized name of any of the user's feeds
+- `400` if both `add` and `remove` are missing or empty
+- `400` if either `add` or `remove` is present and isn't an array
+- `404` if a source in `add` or `remove` is not the username of any user
 - `409` if a source in `add` is already a source of the feed
 - `404` if a source in `remove` is not a source of the feed
-- `400` if both `add` and `remove` are missing or empty
 
 #### `DELETE /api/feeds/:name` - Delete a feed
 
@@ -423,7 +424,9 @@ This renders the `index.html` file that will be used to interact with the backen
 **Throws**
 
 - `401` if the user is not logged in
+- `400` if `name` is not given
 - `404` if the name is not a recognized name of any of the user's feeds
+- `400` if the user tries to delete the "Following" feed
 
 #### `GET /api/threads?freetId=FREETID` - Get all freets in a thread
 
