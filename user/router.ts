@@ -90,6 +90,7 @@ router.post(
   async (req: Request, res: Response) => {
     const user = await UserCollection.addOne(req.body.username, req.body.password);
     await FollowCollection.addOne(user._id);
+    await FeedCollection.addOne(user._id, "Following");
     req.session.userId = user._id.toString();
     res.status(201).json({
       message: `Your account was created successfully. You have been logged in as ${user.username}`,

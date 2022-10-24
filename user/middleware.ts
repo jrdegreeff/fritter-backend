@@ -177,21 +177,6 @@ const isParamsUsernameExists = async (req: Request, res: Response, next: NextFun
   isUserExists((req.params.username as string) ?? '', res, next);
 };
 
-/**
- * Checks if req.body.username is not the same user as req.session
- */
-const isUsernameNotSelf = async (req: Request, res: Response, next: NextFunction) => {
-  const user = await UserCollection.findOneByUsername(req.body.username);
-  if (user._id.toString() === req.session.userId) {
-    res.status(400).json({
-      error: `You can't follow yourself!`
-    });
-    return;
-  }
-
-  next();
-};
-
 
 export {
   isCurrentSessionUserExists,
@@ -203,7 +188,6 @@ export {
   isQueryUsernameExists,
   isBodyUsernameExists,
   isParamsUsernameExists,
-  isUsernameNotSelf,
   isValidUsername,
   isValidPassword
 };

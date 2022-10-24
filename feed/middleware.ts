@@ -110,7 +110,7 @@ const isValidFeedPatch = async (req: Request, res: Response, next: NextFunction)
  *  Checks if req.params.name is not the reserved feed "Following"
  */
 const isNameNotFollowing = (req: Request, res: Response, next: NextFunction) => {
-    if (req.body.name === "Following") {
+    if (req.params.name === "Following") {
         res.status(400).json({
             error: 'Cannot delete the Following feed'
         });

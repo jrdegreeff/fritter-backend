@@ -83,7 +83,6 @@ class FeedCollection {
      * @param source the username of the source to look for
      */
     static async hasSource(userId: Types.ObjectId | string, name: string, source: string) : Promise<Boolean> {
-        console.log(source);
         const sourceId = (await UserCollection.findOneByUsername(source))._id;
         const result = await FeedModel.findOne({owner: userId, name, sources: sourceId});
         return result !== null;

@@ -1,6 +1,8 @@
 import type {Request, Response} from 'express';
 import express from 'express';
 import FeedCollection from './collection';
+import UserCollection from '../user/collection';
+import FollowCollection from '../follow/collection';
 import * as userValidator from '../user/middleware';
 import * as feedValidator from '../feed/middleware';
 import * as util from './util';
@@ -86,9 +88,17 @@ router.patch(
         const remove = (req.body.remove && JSON.parse(req.body.remove) as Array<string>) || [];
         for (const source of add) {
             await FeedCollection.addSource(req.session.userId, req.params.name, source);
+            if (req.params.name === "Following") {
+                const sourceId = (await UserCollection.findOneByUsername(source))._id;
+                await FollowCollection.insertFollow(req.session.userId, sourceId);
+            }
         }
         for (const source of remove) {
             await FeedCollection.removeSource(req.session.userId, req.params.name, source);
+            if (req.params.name === "Following") {
+                const sourceId = (await UserCollection.findOneByUsername(source))._id;
+                await FollowCollection.removeFollow(req.session.userId, sourceId);
+            }
         }
         const feed = await FeedCollection.findOne(req.session.userId, req.params.name);
         const response = util.constructFeedResponse(feed);

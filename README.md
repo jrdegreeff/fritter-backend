@@ -347,8 +347,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - `401` if the user is not logged in
 - `400` if `username` is not given
 - `404` if `username` is not a recognized username of any user
-- `400` if username is the logged in user
-- `409` if the user already follows username
+- `409` if the user already follows `username`
 
 #### `DELETE /api/follows/:username` - Unfollow a user
 

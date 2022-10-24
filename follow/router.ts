@@ -1,6 +1,7 @@
 import type {Request, Response} from 'express';
 import express from 'express';
 import FollowCollection from './collection';
+import FeedCollection from '../feed/collection';
 import * as userValidator from '../user/middleware';
 import * as followValidator from '../follow/middleware';
 import * as util from './util';
@@ -38,17 +39,16 @@ router.get(
  * @throws {401} if the user is not logged in
  * @throws {400} if username is not given
  * @throws {404} if username is not a recognized username of any user
- * @throws {400} if username is the logged in user
  * @throws {409} if the user already follows username
  */
 router.post(
     '/',
     userValidator.isUserLoggedIn,
     userValidator.isBodyUsernameExists,
-    userValidator.isUsernameNotSelf,
     followValidator.isNotFollower,
     async (req: Request, res: Response) => {
         await FollowCollection.insertFollowByUsername(req.session.userId, req.body.username);
+        await FeedCollection.addSource(req.session.userId, "Following", req.body.username);
         res.status(201).json({
             message: `Followed ${req.body.username} successfully.`
         });
@@ -73,6 +73,7 @@ router.delete(
     followValidator.isFollower,
     async (req: Request, res: Response) => {
         await FollowCollection.removeFollowByUsername(req.session.userId, req.params.username);
+        await FeedCollection.removeSource(req.session.userId, "Following", req.params.username);
         res.status(200).json({
             message: `Unfollowed ${req.params.username} successfully.`
         });

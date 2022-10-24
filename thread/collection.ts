@@ -67,7 +67,7 @@ class ThreadCollection {
      */
     static async deleteMany(authorId: Types.ObjectId | string): Promise<void> {
         const freets = await FreetCollection.findAllFreetIdsByUserId(authorId);
-        ThreadModel.deleteMany({freet: {$in: freets}});
+        await ThreadModel.deleteMany({freet: {$in: freets}});
     }
 
 }
